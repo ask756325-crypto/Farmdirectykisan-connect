@@ -1,4 +1,4 @@
-import { Language } from '../types';
+﻿import { Language } from '../types';
 
 // Translations for English, Malayalam, Hindi, and Telugu
 export const welcomeTranslations: Record<Language, {

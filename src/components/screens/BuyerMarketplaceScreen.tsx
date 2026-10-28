@@ -9,6 +9,11 @@ import {
   LogOut,
   User as UserIcon,
   ShieldCheck,
+  BarChart3,
+  Bot,
+  Building2,
+  Sparkles,
+  CloudSun,
 } from 'lucide-react';
 import { Card, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
@@ -31,6 +36,43 @@ interface BuyerMarketplaceScreenProps {
   getTranslatedVillageName: (village: string, lang: Language) => string;
 }
 
+const BUYER_HUB_TRANSLATIONS: Record<Language, {
+  mandiRates: string;
+  medhaAI: string;
+  directory: string;
+  services: string;
+  weather: string;
+}> = {
+  en: {
+    mandiRates: 'Mandi Live Rates',
+    medhaAI: 'Medha AI Advisor',
+    directory: 'Agri Directory',
+    services: 'Trust & Logistics',
+    weather: 'Weather Forecast',
+  },
+  ml: {
+    mandiRates: 'വിപണി വിലകൾ',
+    medhaAI: 'മേധ AI സഹായി',
+    directory: 'ബിസിനസ്സ് ഡയറക്ടറി',
+    services: 'വിശ്വാസ്യതയും സേവനങ്ങളും',
+    weather: 'കാലാവസ്ഥ',
+  },
+  hi: {
+    mandiRates: 'मंडी लाइव भाव',
+    medhaAI: 'मेधा एआई सलाहकार',
+    directory: 'कृषि निर्देशिका',
+    services: 'भरोसा व लॉजिस्टिक्स',
+    weather: 'मौसम पूर्वानुमान',
+  },
+  te: {
+    mandiRates: 'మార్కెట్ లైవ్ ధరలు',
+    medhaAI: 'మేధ AI సలహాదారు',
+    directory: 'వ్యాపార డైరెక్టరీ',
+    services: 'విశ్వసనీయత & సేవలు',
+    weather: 'వాతావరణం',
+  },
+};
+
 export function BuyerMarketplaceScreen({
   language,
   onLanguageChange,
@@ -48,6 +90,7 @@ export function BuyerMarketplaceScreen({
   const [maxPrice, setMaxPrice] = useState<number | ''>('');
 
   const t = buyerMarketTranslations[language];
+  const tHub = BUYER_HUB_TRANSLATIONS[language];
 
   const filteredProduce = useMemo(() => {
     return produce.filter((item) => {
@@ -181,6 +224,74 @@ export function BuyerMarketplaceScreen({
 
       {/* Main Grid */}
       <div className="max-w-5xl mx-auto p-4 md:p-6">
+        {/* Buyer Quick Services Bar */}
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 mb-6">
+          <button
+            onClick={() => onNavigate('mandi-prices')}
+            className="flex items-center gap-2 p-2.5 bg-white hover:bg-emerald-50/70 border border-emerald-100 rounded-xl shadow-xs transition-all text-left group"
+          >
+            <div className="p-2 rounded-lg bg-blue-50 text-blue-600 group-hover:scale-105 transition-transform">
+              <BarChart3 className="h-4 w-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-gray-900 leading-tight">{tHub.mandiRates}</p>
+              <p className="text-[10px] text-gray-500">APMC Trends</p>
+            </div>
+          </button>
+
+          <button
+            onClick={() => onNavigate('medha-ai')}
+            className="flex items-center gap-2 p-2.5 bg-white hover:bg-emerald-50/70 border border-emerald-100 rounded-xl shadow-xs transition-all text-left group"
+          >
+            <div className="p-2 rounded-lg bg-emerald-50 text-emerald-600 group-hover:scale-105 transition-transform">
+              <Bot className="h-4 w-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-gray-900 leading-tight">{tHub.medhaAI}</p>
+              <p className="text-[10px] text-gray-500">Voice AI</p>
+            </div>
+          </button>
+
+          <button
+            onClick={() => onNavigate('company-directory')}
+            className="flex items-center gap-2 p-2.5 bg-white hover:bg-emerald-50/70 border border-emerald-100 rounded-xl shadow-xs transition-all text-left group"
+          >
+            <div className="p-2 rounded-lg bg-indigo-50 text-indigo-600 group-hover:scale-105 transition-transform">
+              <Building2 className="h-4 w-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-gray-900 leading-tight">{tHub.directory}</p>
+              <p className="text-[10px] text-gray-500">Verified B2B</p>
+            </div>
+          </button>
+
+          <button
+            onClick={() => onNavigate('digital-services')}
+            className="flex items-center gap-2 p-2.5 bg-white hover:bg-emerald-50/70 border border-emerald-100 rounded-xl shadow-xs transition-all text-left group"
+          >
+            <div className="p-2 rounded-lg bg-teal-50 text-teal-600 group-hover:scale-105 transition-transform">
+              <ShieldCheck className="h-4 w-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-gray-900 leading-tight">{tHub.services}</p>
+              <p className="text-[10px] text-gray-500">KYC & GPS</p>
+            </div>
+          </button>
+
+          <button
+            onClick={() => onNavigate('weather-advisory')}
+            className="flex items-center gap-2 p-2.5 bg-white hover:bg-emerald-50/70 border border-emerald-100 rounded-xl shadow-xs transition-all text-left group col-span-2 sm:col-span-1"
+          >
+            <div className="p-2 rounded-lg bg-sky-50 text-sky-600 group-hover:scale-105 transition-transform">
+              <CloudSun className="h-4 w-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-gray-900 leading-tight">{tHub.weather}</p>
+              <p className="text-[10px] text-gray-500">Forecast</p>
+            </div>
+          </button>
+        </div>
+
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-xl font-bold text-gray-900 tracking-tight">{t.freshProduce}</h2>

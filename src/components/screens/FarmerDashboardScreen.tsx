@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+﻿import { motion } from 'motion/react';
 import {
   IndianRupee,
   TrendingUp,
@@ -6,6 +6,15 @@ import {
   Package,
   LogOut,
   Calendar,
+  Sparkles,
+  CloudSun,
+  ScanLine,
+  BarChart3,
+  ShoppingBag,
+  Building2,
+  ShieldCheck,
+  ChevronRight,
+  Bot,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Button } from '../ui/Button';
@@ -13,6 +22,93 @@ import { Badge } from '../ui/Badge';
 import { Language, User, Produce, Screen } from '../../types';
 import { farmerDashTranslations } from '../../data/translations';
 import { LanguageSelector } from '../ui/LanguageSelector';
+
+const HUB_LABELS: Record<Language, {
+  sectionTitle: string;
+  medhaTitle: string;
+  medhaDesc: string;
+  weatherTitle: string;
+  weatherDesc: string;
+  diagnosisTitle: string;
+  diagnosisDesc: string;
+  mandiTitle: string;
+  mandiDesc: string;
+  inputTitle: string;
+  inputDesc: string;
+  directoryTitle: string;
+  directoryDesc: string;
+  servicesTitle: string;
+  servicesDesc: string;
+}> = {
+  en: {
+    sectionTitle: 'Smart Farming Hub & Advisory',
+    medhaTitle: 'Medha AI Advisor',
+    medhaDesc: 'Multilingual voice assistant for crops & diseases',
+    weatherTitle: 'Weather & Planning',
+    weatherDesc: 'Rainfall, alerts & crop calendar advisory',
+    diagnosisTitle: 'Crop Diagnosis AI',
+    diagnosisDesc: 'Scan leaves to detect plant diseases & pests',
+    mandiTitle: 'Mandi Live Rates',
+    mandiDesc: 'APMC wholesale prices & AI forecasting',
+    inputTitle: 'Agri Store & Subsidies',
+    inputDesc: 'Genuine inputs & PM-KISAN schemes',
+    directoryTitle: 'Agri Directory',
+    directoryDesc: 'Verified buyers, mills & logistics partners',
+    servicesTitle: 'Trust & Digital Services',
+    servicesDesc: 'Aadhaar KYC, GPS transit & KCC loans',
+  },
+  ml: {
+    sectionTitle: 'സ്മാർട്ട് കാർഷിക സേവനങ്ങളും ഉപദേശങ്ങളും',
+    medhaTitle: 'മേധ AI ഉപദേശക',
+    medhaDesc: 'ശബ്ദത്തിലൂടെ സംസാരിക്കാവുന്ന സഹായി',
+    weatherTitle: 'കാലാവസ്ഥ & ആസൂത്രണം',
+    weatherDesc: 'മഴ, രോഗ മുന്നറിയിപ്പുകൾ, കാർഷിക കലണ്ടർ',
+    diagnosisTitle: 'വിള രോഗ നിർണയം',
+    diagnosisDesc: 'ഫോട്ടോ എടുത്ത് രോഗങ്ങൾ കണ്ടെത്തുക',
+    mandiTitle: 'വിപണി തത്സമയ വിലകൾ',
+    mandiDesc: 'APMC വിലകളും AI പ്രവചനവും',
+    inputTitle: 'ഇൻപുട്ട് സ്റ്റോർ & സബ്സിഡികൾ',
+    inputDesc: 'വിത്തുകൾ, വളങ്ങൾ, സർക്കാർ സഹായങ്ങൾ',
+    directoryTitle: 'ബിസിനസ്സ് ഡയറക്ടറി',
+    directoryDesc: 'പരിശോധിച്ച വാങ്ങുന്നവരും ലോജിസ്റ്റിക്സും',
+    servicesTitle: 'വിശ്വാസ്യതയും സേവനങ്ങളും',
+    servicesDesc: 'ആധാർ KYC, GPS ട്രാക്കിംഗ്, വായ്പകൾ',
+  },
+  hi: {
+    sectionTitle: 'स्मार्ट कृषि हब और विशेषज्ञ सलाह',
+    medhaTitle: 'मेधा एआई सलाहकार',
+    medhaDesc: 'आवाज से संचालित बहुभाषी कृषि साथी',
+    weatherTitle: 'मौसम एवं योजना',
+    weatherDesc: 'बारिश का पूर्वानुमान एवं फसल कैलेंडर',
+    diagnosisTitle: 'फसल रोग निदान',
+    diagnosisDesc: 'पत्ते की फोटो खींचकर रोग व उपचार जानें',
+    mandiTitle: 'मंडी लाइव भाव',
+    mandiDesc: 'एपीएमसी थोक दरें एवं मूल्य रुझान',
+    inputTitle: 'कृषि स्टोर व सब्सिडी',
+    inputDesc: 'प्रमाणित बीज, खाद व सरकारी योजनाएं',
+    directoryTitle: 'कृषि निर्देशिका',
+    directoryDesc: 'सत्यापित खरीदार व परिवहन भागीदार',
+    servicesTitle: 'भरोसा और डिजिटल सेवाएं',
+    servicesDesc: 'आधार सत्यापन, जीपीएस ट्रैकिंग, किसान ऋण',
+  },
+  te: {
+    sectionTitle: 'స్మార్ట్ వ్యవసాయ సేవలు & సలహాలు',
+    medhaTitle: 'మేధ AI సలహాదారు',
+    medhaDesc: 'వాయిస్ ఆధారిత బహుభాషా వ్యవసాయ సహాయకురాలు',
+    weatherTitle: 'వాతావరణం & ప్రణాళిక',
+    weatherDesc: 'వర్షపాతం, హెచ్చరికలు & పంట సలహాలు',
+    diagnosisTitle: 'పంట తెగుళ్ల నిర్ధారణ',
+    diagnosisDesc: 'ఫోటో తీసి తెగుళ్లు మరియు చికిత్స తెలుసుకోండి',
+    mandiTitle: 'మార్కెట్ లైవ్ ధరలు',
+    mandiDesc: 'APMC టోకు ధరలు మరియు భవిష్యత్తు అంచనాలు',
+    inputTitle: 'ఇన్‌పుట్ స్టోర్ & సబ్సిడీలు',
+    inputDesc: 'అసలైన విత్తనాలు, ఎరువులు & ప్రభుత్వ పథకాలు',
+    directoryTitle: 'వ్యాపార డైరెక్టరీ',
+    directoryDesc: 'ధృవీకరించిన కొనుగోలుదారులు & రవాణా',
+    servicesTitle: 'విశ్వసనీయత & సేవలు',
+    servicesDesc: 'ఆధార్ ధృవీకరణ, GPS ట్రాకింగ్, పంట రుణాలు',
+  },
+};
 
 interface FarmerDashboardScreenProps {
   language: Language;
@@ -38,6 +134,7 @@ export function FarmerDashboardScreen({
   getTranslatedVillageName,
 }: FarmerDashboardScreenProps) {
   const t = farmerDashTranslations[language];
+  const hub = HUB_LABELS[language];
 
   // Calculate earnings
   const soldEarnings = produce
@@ -75,6 +172,65 @@ export function FarmerDashboardScreen({
         return status;
     }
   };
+
+  const featureCards = [
+    {
+      screen: 'medha-ai' as Screen,
+      title: hub.medhaTitle,
+      desc: hub.medhaDesc,
+      icon: <Bot className="h-6 w-6 text-emerald-600" />,
+      color: 'bg-emerald-50 hover:bg-emerald-100/70 border-emerald-200',
+      badge: 'Voice AI',
+    },
+    {
+      screen: 'weather-advisory' as Screen,
+      title: hub.weatherTitle,
+      desc: hub.weatherDesc,
+      icon: <CloudSun className="h-6 w-6 text-sky-600" />,
+      color: 'bg-sky-50 hover:bg-sky-100/70 border-sky-200',
+      badge: 'Live',
+    },
+    {
+      screen: 'crop-diagnosis' as Screen,
+      title: hub.diagnosisTitle,
+      desc: hub.diagnosisDesc,
+      icon: <ScanLine className="h-6 w-6 text-teal-600" />,
+      color: 'bg-teal-50 hover:bg-teal-100/70 border-teal-200',
+      badge: 'Vision AI',
+    },
+    {
+      screen: 'mandi-prices' as Screen,
+      title: hub.mandiTitle,
+      desc: hub.mandiDesc,
+      icon: <BarChart3 className="h-6 w-6 text-blue-600" />,
+      color: 'bg-blue-50 hover:bg-blue-100/70 border-blue-200',
+      badge: 'APMC',
+    },
+    {
+      screen: 'input-marketplace' as Screen,
+      title: hub.inputTitle,
+      desc: hub.inputDesc,
+      icon: <ShoppingBag className="h-6 w-6 text-orange-600" />,
+      color: 'bg-orange-50 hover:bg-orange-100/70 border-orange-200',
+      badge: 'Subsidies',
+    },
+    {
+      screen: 'company-directory' as Screen,
+      title: hub.directoryTitle,
+      desc: hub.directoryDesc,
+      icon: <Building2 className="h-6 w-6 text-indigo-600" />,
+      color: 'bg-indigo-50 hover:bg-indigo-100/70 border-indigo-200',
+      badge: 'B2B',
+    },
+    {
+      screen: 'digital-services' as Screen,
+      title: hub.servicesTitle,
+      desc: hub.servicesDesc,
+      icon: <ShieldCheck className="h-6 w-6 text-slate-700" />,
+      color: 'bg-slate-50 hover:bg-slate-100/70 border-slate-200',
+      badge: 'KYC & Loans',
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-50/60 to-emerald-100/40 pb-12 text-gray-900">
@@ -158,6 +314,45 @@ export function FarmerDashboardScreen({
             <span>{t.addProduce}</span>
           </Button>
         </motion.div>
+
+        {/* Smart Farming Hub & Advisory Services Grid */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <h2 className="text-base md:text-lg font-bold text-gray-900 flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-emerald-600" />
+              {hub.sectionTitle}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            {featureCards.map((card) => (
+              <motion.div
+                key={card.screen}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => onNavigate(card.screen)}
+                className={`p-3.5 rounded-xl border cursor-pointer transition-all shadow-sm ${card.color} flex flex-col justify-between`}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="p-2 rounded-lg bg-white/80 shadow-xs border border-white">
+                      {card.icon}
+                    </div>
+                    <Badge className="bg-white/90 text-gray-700 border-gray-200 text-[10px] font-bold">
+                      {card.badge}
+                    </Badge>
+                  </div>
+                  <h3 className="font-bold text-sm text-gray-900">{card.title}</h3>
+                  <p className="text-xs text-gray-600 mt-0.5 line-clamp-2">{card.desc}</p>
+                </div>
+
+                <div className="mt-3 pt-2 border-t border-black/5 flex items-center justify-end text-xs font-bold text-gray-700">
+                  <span className="flex items-center">Open <ChevronRight className="h-3.5 w-3.5 ml-0.5" /></span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
         {/* My Listings Card */}
         <Card className="shadow-md border-emerald-100">

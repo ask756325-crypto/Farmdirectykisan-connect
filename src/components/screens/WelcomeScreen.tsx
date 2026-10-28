@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Sprout, Users, Shield, CircleCheckBig, Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';

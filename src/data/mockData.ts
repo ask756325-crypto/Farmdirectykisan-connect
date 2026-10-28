@@ -1,4 +1,4 @@
-import { Produce, User, GovernmentPrice, Language, ChatMessage, UserType } from '../types';
+﻿import { Produce, User, GovernmentPrice, Language, ChatMessage, UserType } from '../types';
 
 export const INITIAL_PRODUCE: Produce[] = [
   {

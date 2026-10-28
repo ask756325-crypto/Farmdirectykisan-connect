@@ -1,4 +1,4 @@
-export type Language = 'en' | 'ml' | 'hi' | 'te';
+﻿export type Language = 'en' | 'ml' | 'hi' | 'te';
 
 export type UserType = 'farmer' | 'buyer';
 
@@ -55,4 +55,11 @@ export type Screen =
   | 'listing-detail'
   | 'chat'
   | 'payment-escrow'
-  | 'delivery-confirmation';
+  | 'delivery-confirmation'
+  | 'weather-advisory'
+  | 'crop-diagnosis'
+  | 'input-marketplace'
+  | 'mandi-prices'
+  | 'medha-ai'
+  | 'company-directory'
+  | 'digital-services';

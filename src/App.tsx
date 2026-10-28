@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+﻿import { useState, useEffect, useCallback } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { WifiOff } from 'lucide-react';
 import { Language, User, Produce, Screen, UserType } from './types';
@@ -20,6 +20,13 @@ import { ListingDetailScreen } from './components/screens/ListingDetailScreen';
 import { ChatScreen } from './components/screens/ChatScreen';
 import { PaymentEscrowScreen } from './components/screens/PaymentEscrowScreen';
 import { DeliveryConfirmationScreen } from './components/screens/DeliveryConfirmationScreen';
+import { WeatherAdvisoryScreen } from './components/screens/WeatherAdvisoryScreen';
+import { CropDiagnosisScreen } from './components/screens/CropDiagnosisScreen';
+import { InputMarketplaceScreen } from './components/screens/InputMarketplaceScreen';
+import { MandiPricesScreen } from './components/screens/MandiPricesScreen';
+import { AIAdvisorScreen } from './components/screens/AIAdvisorScreen';
+import { CompanyDirectoryScreen } from './components/screens/CompanyDirectoryScreen';
+import { DigitalServicesScreen } from './components/screens/DigitalServicesScreen';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 
 export default function App() {
@@ -207,6 +214,14 @@ export default function App() {
     }
   };
 
+  const handleBackToMain = () => {
+    if (currentUser?.type === 'farmer') {
+      setCurrentScreen('farmer-dashboard');
+    } else {
+      setCurrentScreen('buyer-marketplace');
+    }
+  };
+
   return (
     <ErrorBoundary>
       <div className="min-h-screen bg-slate-50 relative selection:bg-emerald-500 selection:text-white">
@@ -249,7 +264,6 @@ export default function App() {
                 onLanguageChange={handleLanguageChange}
                 user={currentUser}
                 onComplete={handleOnboardingComplete}
-                onSkip={handleOnboardingComplete}
               />
             </motion.div>
           )}
@@ -418,6 +432,120 @@ export default function App() {
                 onFinish={handleDeliveryFinished}
                 getTranslatedCropName={getCropTranslation}
                 getTranslatedUserName={getNameTranslation}
+              />
+            </motion.div>
+          )}
+
+          {/* New Feature Screens */}
+          {currentScreen === 'weather-advisory' && (
+            <motion.div
+              key="weather-advisory"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <WeatherAdvisoryScreen
+                language={language}
+                onLanguageChange={handleLanguageChange}
+                onBack={handleBackToMain}
+              />
+            </motion.div>
+          )}
+
+          {currentScreen === 'crop-diagnosis' && (
+            <motion.div
+              key="crop-diagnosis"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <CropDiagnosisScreen
+                language={language}
+                onLanguageChange={handleLanguageChange}
+                onBack={handleBackToMain}
+              />
+            </motion.div>
+          )}
+
+          {currentScreen === 'input-marketplace' && (
+            <motion.div
+              key="input-marketplace"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <InputMarketplaceScreen
+                language={language}
+                onLanguageChange={handleLanguageChange}
+                onBack={handleBackToMain}
+              />
+            </motion.div>
+          )}
+
+          {currentScreen === 'mandi-prices' && (
+            <motion.div
+              key="mandi-prices"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <MandiPricesScreen
+                language={language}
+                onLanguageChange={handleLanguageChange}
+                onBack={handleBackToMain}
+              />
+            </motion.div>
+          )}
+
+          {currentScreen === 'medha-ai' && (
+            <motion.div
+              key="medha-ai"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <AIAdvisorScreen
+                language={language}
+                onLanguageChange={handleLanguageChange}
+                onBack={handleBackToMain}
+                onNavigateToScreen={(screen) => setCurrentScreen(screen)}
+              />
+            </motion.div>
+          )}
+
+          {currentScreen === 'company-directory' && (
+            <motion.div
+              key="company-directory"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <CompanyDirectoryScreen
+                language={language}
+                onLanguageChange={handleLanguageChange}
+                onBack={handleBackToMain}
+              />
+            </motion.div>
+          )}
+
+          {currentScreen === 'digital-services' && (
+            <motion.div
+              key="digital-services"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <DigitalServicesScreen
+                language={language}
+                onLanguageChange={handleLanguageChange}
+                onBack={handleBackToMain}
               />
             </motion.div>
           )}
